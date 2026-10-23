@@ -1,0 +1,228 @@
+/* ==========================================================================
+   DESIGN TOKENS
+   Palette: peony pink, warm cream/ivory, espresso brown, soft beige.
+   Light mode = cream surfaces with espresso text and peony accents.
+   Dark mode  = deep espresso surfaces with cream text and muted peony accents.
+   ========================================================================== */
+
+:root {
+  /* base palette */
+  --peony: #c97c93;
+  --peony-deep: #9c5069;
+  --peony-soft: #eccdd6;
+  --cream: #faf4ea;
+  --beige: #efe3cf;
+  --espresso: #4a3223;
+  --espresso-dark: #2a1b12;
+
+  /* semantic tokens — light mode (default) */
+  --bg: var(--cream);
+  --bg-soft: var(--beige);
+  --surface: #fffdf9;
+  --text: var(--espresso-dark);
+  --text-muted: #7a6350;
+  --accent: var(--peony);
+  --accent-strong: var(--peony-deep);
+  --contrast-bg: var(--espresso);
+  --contrast-text: var(--cream);
+  --border: rgba(74, 50, 35, 0.16);
+  --shadow: rgba(42, 27, 18, 0.14);
+  --focus-ring: #9c5069;
+
+  /* type */
+  --font-serif: 'Fraunces', 'Iowan Old Style', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* rhythm */
+  --section-pad: clamp(5rem, 10vw, 9rem);
+  --container-w: 1180px;
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #211610;
+  --bg-soft: #2b1c14;
+  --surface: #2f2018;
+  --text: #f4eadd;
+  --text-muted: #c6ac97;
+  --accent: #dea0b0;
+  --accent-strong: #ecbfcb;
+  --contrast-bg: #f4eadd;
+  --contrast-text: #2a1b12;
+  --border: rgba(244, 234, 221, 0.14);
+  --shadow: rgba(0, 0, 0, 0.45);
+  --focus-ring: #dea0b0;
+
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   RESET
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* visible keyboard focus everywhere */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   TYPE SCALE
+   ========================================================================== */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--text);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  margin-bottom: 1.1rem;
+}
+
+.section-heading {
+  font-size: clamp(2.1rem, 4vw, 3.1rem);
+  font-style: italic;
+}
+
+.section-lede {
+  max-width: 46ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+/* ==========================================================================
+   LAYOUT HELPERS
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-w);
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 5vw, 3rem);
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-pad);
+}
+
+.section--soft {
+  background: var(--bg-soft);
+}
+
+.section--contrast {
+  background: var(--contrast-bg);
+  color: var(--contrast-text);
+}
+
+.section--contrast .text-muted {
+  color: color-mix(in srgb, var(--contrast-text) 70%, transparent);
+}
+
+/* ==========================================================================
+   SCROLL REVEAL
+   Applied by the useScrollReveal hook: elements start hidden/offset and
+   settle into place once they cross the viewport threshold. Kept to a
+   single quiet motion (fade + gentle rise) rather than a different effect
+   per element, so it reads as one considered choice rather than a pile of
+   animation tricks.
+   ========================================================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+.reveal-delay-4 { transition-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal.is-visible {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  * {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --section-pad: clamp(3.5rem, 14vw, 5rem);
+  }
+}

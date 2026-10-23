@@ -1,0 +1,31 @@
+.projects__heading {
+  max-width: 40rem;
+  margin-bottom: 3.5rem;
+}
+
+.projects__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.projects__more {
+  margin-top: 2rem;
+  padding: 2rem clamp(1.5rem, 3vw, 2.5rem);
+  border: 1px dashed var(--border);
+  border-radius: 22px;
+  text-align: center;
+}
+
+.projects__more-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.projects__more-text {
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+}

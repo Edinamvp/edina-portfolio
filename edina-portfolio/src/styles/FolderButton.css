@@ -1,0 +1,105 @@
+.folder-btn {
+  position: relative;
+  display: inline-block;
+  width: 216px;
+  height: 84px;
+}
+
+/* the folder body sitting behind the flap, slightly larger and rotated */
+.folder-btn__back {
+  position: absolute;
+  top: 14px;
+  left: 8px;
+  right: -6px;
+  bottom: -6px;
+  background: var(--beige);
+  border-radius: 4px 18px 18px 18px;
+  border: 1px solid var(--border);
+  box-shadow: 0 14px 30px -10px var(--shadow);
+  transform: rotate(-3deg);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s ease;
+}
+
+/* the little tab sticking up, like a real manila folder */
+.folder-btn__back .folder-btn__tab {
+  position: absolute;
+  top: -9px;
+  left: 18px;
+  width: 62px;
+  height: 14px;
+  background: var(--beige);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+}
+
+/* handwritten-style note revealed once the flap lifts */
+.folder-btn__peek {
+  position: absolute;
+  left: 26px;
+  bottom: 16px;
+  z-index: 2;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+}
+
+/* the clickable flap on top */
+.folder-btn__front {
+  position: absolute;
+  z-index: 3;
+  inset: 0 10px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--contrast-bg);
+  color: var(--contrast-text);
+  border-radius: 4px 18px 18px 4px;
+  box-shadow: 0 16px 32px -8px var(--shadow);
+  transform-origin: bottom left;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s ease;
+}
+
+.folder-btn__label {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.01em;
+}
+
+.folder-btn__arrow {
+  transition: transform 0.35s ease;
+}
+
+.folder-btn:hover .folder-btn__front,
+.folder-btn:focus-visible .folder-btn__front {
+  transform: translateY(-10px) rotate(-4deg);
+  box-shadow: 0 26px 40px -10px var(--shadow);
+}
+
+.folder-btn:hover .folder-btn__back,
+.folder-btn:focus-visible .folder-btn__back {
+  transform: rotate(-6deg) translateY(3px);
+}
+
+.folder-btn:hover .folder-btn__peek,
+.folder-btn:focus-visible .folder-btn__peek {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.folder-btn:hover .folder-btn__arrow,
+.folder-btn:focus-visible .folder-btn__arrow {
+  transform: translateX(4px);
+}
+
+.folder-btn:active .folder-btn__front {
+  transform: translateY(-4px) rotate(-2deg);
+}

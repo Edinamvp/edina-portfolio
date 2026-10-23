@@ -1,0 +1,36 @@
+.skills__heading {
+  max-width: 40rem;
+  margin-bottom: 3.2rem;
+}
+
+.skills__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.skills__pill {
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.skills__pill {
+    transform: 0.25s ease;
+    background: 0.25s ease;
+    color: 0.25s ease;
+    border-color: 0.25s ease;
+}
+
+.skills__pill:hover {
+  transform: translateY(-6px) scale(1.07);
+  border-color: var(--accent-strong);
+  background: var(--accent);
+  color: var(--surface);
+}
